@@ -1,0 +1,94 @@
+[
+  {
+    "id": "RAG-001",
+    "input": "How much does the Nimbus Plus plan cost and how much data do I get?",
+    "expected_output": "Nimbus Plus costs $30 per month and includes 25 GB of data.",
+    "expected_context": [
+      "Mobile plans: Nimbus Go costs $15 per month and includes 5 GB of data. Nimbus Plus costs $30 per month and includes 25 GB of data. Nimbus Max costs $45 per month and includes unlimited data. All plans include unlimited calls and texts within the country."
+    ],
+    "tags": [
+      "plans",
+      "pricing"
+    ]
+  },
+  {
+    "id": "RAG-002",
+    "input": "When is my bill due?",
+    "expected_output": "Payment is due within 14 days of the bill date.",
+    "expected_context": [
+      "Billing and payments: Bills are issued on the 1st of each month. Payment is due within 14 days of the bill date. A late fee of $5 is added if payment is more than 7 days overdue. You can pay by card, bank transfer, or in the Nimbus app."
+    ],
+    "tags": [
+      "billing"
+    ]
+  },
+  {
+    "id": "RAG-003",
+    "input": "Is there a late fee if I pay late?",
+    "expected_output": "Yes. A late fee of $5 is added if payment is more than 7 days overdue.",
+    "expected_context": [
+      "Billing and payments: Bills are issued on the 1st of each month. Payment is due within 14 days of the bill date. A late fee of $5 is added if payment is more than 7 days overdue. You can pay by card, bank transfer, or in the Nimbus app."
+    ],
+    "tags": [
+      "billing",
+      "fees"
+    ]
+  },
+  {
+    "id": "RAG-004",
+    "input": "Can I get a refund if I cancel a new plan?",
+    "expected_output": "Yes. A new plan can be cancelled for a full refund within 14 days of activation.",
+    "expected_context": [
+      "Refunds: A new plan can be cancelled for a full refund within 14 days of activation. Refunds are returned to the original payment method within 5 to 7 business days. Devices must be returned in original condition to qualify for a refund."
+    ],
+    "tags": [
+      "refunds"
+    ]
+  },
+  {
+    "id": "RAG-005",
+    "input": "How much is a roaming pass on Nimbus Go?",
+    "expected_output": "On Nimbus Go, a roaming pass costs $6 per day.",
+    "expected_context": [
+      "Roaming: Roaming is included at no extra cost in 40 countries on Nimbus Plus and Nimbus Max. On Nimbus Go, a roaming pass costs $6 per day. Roaming must be switched on in the Nimbus app before you travel."
+    ],
+    "tags": [
+      "roaming",
+      "pricing"
+    ]
+  },
+  {
+    "id": "RAG-006",
+    "input": "How long does a replacement SIM take to arrive and what does it cost?",
+    "expected_output": "A replacement SIM costs $5 and arrives in 3 to 5 business days.",
+    "expected_context": [
+      "SIM cards: A replacement SIM costs $5 and arrives in 3 to 5 business days. An eSIM can be activated instantly in the Nimbus app at no charge. Report a lost or stolen SIM immediately so the line can be blocked."
+    ],
+    "tags": [
+      "sim"
+    ]
+  },
+  {
+    "id": "RAG-007",
+    "input": "How do I buy a data top-up?",
+    "expected_output": "You can buy a top-up in the Nimbus app or by texting DATA to 5555. A 5 GB top-up costs $8 and is valid for 30 days.",
+    "expected_context": [
+      "Data top-ups: A data top-up of 5 GB costs $8 and is valid for 30 days. Top-ups can be bought in the Nimbus app or by texting DATA to 5555. Unused top-up data does not roll over."
+    ],
+    "tags": [
+      "top-up"
+    ]
+  },
+  {
+    "id": "RAG-008",
+    "input": "Is there a fee for cancelling a 12-month contract early?",
+    "expected_output": "Yes. Cancelling a 12-month contract early costs $10 for each remaining month.",
+    "expected_context": [
+      "Cancelling a plan: You can cancel a plan at any time with 30 days notice. There is no cancellation fee on monthly plans. Cancelling a 12-month contract early costs $10 for each remaining month."
+    ],
+    "tags": [
+      "cancellation",
+      "fees"
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.pytest_cache/
+.ruff_cache/
+.deepeval/
+.deepeval-cache.json
+.deepeval_telemetry.txt
+artifacts/
+eval-results/
+datasets/synthetic/*.json
+dist/
+build/
+.DS_Store

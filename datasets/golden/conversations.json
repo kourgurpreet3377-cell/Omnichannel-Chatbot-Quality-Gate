@@ -1,0 +1,227 @@
+[
+  {
+    "id": "CONV-001",
+    "category": "retention",
+    "scenario": "A customer on the Nimbus Go plan introduces herself, gives an order number, asks about top-ups and roaming, then checks that the assistant still remembers her details.",
+    "expected_outcome": "The assistant answers the top-up question, gives the roaming price for the customer's own plan (Nimbus Go: $6 per day) without asking which plan she is on, and correctly recalls her order number NT-48213 and her name Priya.",
+    "should_escalate": null,
+    "turns": [
+      {
+        "user": "Hi, my name is Priya.",
+        "must_contain": [
+          "Priya"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "My order number is NT-48213.",
+        "must_contain": [
+          "NT-48213"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "I'm on the Nimbus Go plan.",
+        "must_contain": [
+          "Nimbus Go"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "How much is a data top-up?",
+        "must_contain": [
+          "$8"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "Does my plan include roaming?",
+        "must_contain": [
+          "$6"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "Can you remind me of my order number?",
+        "must_contain": [
+          "NT-48213"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "And what name do you have for me?",
+        "must_contain": [
+          "Priya"
+        ],
+        "must_not_contain": []
+      }
+    ]
+  },
+  {
+    "id": "CONV-002",
+    "category": "retention",
+    "scenario": "A customer on the Nimbus Max plan gives his name and plan in one message, asks unrelated billing and SIM questions, then asks plan-specific and recall questions.",
+    "expected_outcome": "The assistant answers the billing and SIM questions, confirms roaming is included at no extra cost on the customer's plan (Nimbus Max), and correctly recalls that he is on Nimbus Max and that his name is Arjun.",
+    "should_escalate": null,
+    "turns": [
+      {
+        "user": "Hello",
+        "must_contain": [],
+        "must_not_contain": []
+      },
+      {
+        "user": "I'm Arjun and I'm on the Nimbus Max plan.",
+        "must_contain": [
+          "Arjun",
+          "Nimbus Max"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "When are bills issued?",
+        "must_contain": [
+          "1st"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "Is an eSIM free?",
+        "must_contain": [
+          "no charge"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "Is roaming included on my plan?",
+        "must_contain": [
+          "no extra cost"
+        ],
+        "must_not_contain": [
+          "$6"
+        ]
+      },
+      {
+        "user": "Which plan am I on?",
+        "must_contain": [
+          "Nimbus Max"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "What is my name?",
+        "must_contain": [
+          "Arjun"
+        ],
+        "must_not_contain": []
+      }
+    ]
+  },
+  {
+    "id": "ESC-001",
+    "category": "escalation",
+    "scenario": "A customer gives an order number and then explicitly asks for a human agent.",
+    "expected_outcome": "The assistant hands over to a live agent immediately, passes on order NT-77102 so the customer does not have to repeat it, and states agent availability.",
+    "should_escalate": true,
+    "turns": [
+      {
+        "user": "My order number is NT-77102.",
+        "must_contain": [],
+        "must_not_contain": []
+      },
+      {
+        "user": "I want to speak to a human agent please.",
+        "must_contain": [
+          "live agent",
+          "NT-77102"
+        ],
+        "must_not_contain": []
+      }
+    ]
+  },
+  {
+    "id": "ESC-002",
+    "category": "escalation",
+    "scenario": "A customer wants to make a formal complaint.",
+    "expected_outcome": "The assistant hands over to a live agent because complaints must be handled by a person.",
+    "should_escalate": true,
+    "turns": [
+      {
+        "user": "This is unacceptable, I want to file a complaint.",
+        "must_contain": [
+          "live agent"
+        ],
+        "must_not_contain": []
+      }
+    ]
+  },
+  {
+    "id": "ESC-003",
+    "category": "escalation",
+    "scenario": "A customer asks two questions in a row that the assistant cannot answer.",
+    "expected_outcome": "The assistant says it cannot help with the first question, and after the second unanswerable question hands over to a live agent instead of repeating the same fallback.",
+    "should_escalate": true,
+    "turns": [
+      {
+        "user": "Can you fix my laptop screen?",
+        "must_contain": [],
+        "must_not_contain": []
+      },
+      {
+        "user": "What about my washing machine?",
+        "must_contain": [
+          "live agent"
+        ],
+        "must_not_contain": []
+      }
+    ]
+  },
+  {
+    "id": "ESC-004",
+    "category": "escalation",
+    "scenario": "A customer asks ordinary questions that the knowledge base answers.",
+    "expected_outcome": "The assistant answers each question itself and does not hand over to an agent, because nothing in the conversation needs a person.",
+    "should_escalate": false,
+    "turns": [
+      {
+        "user": "When is my bill due?",
+        "must_contain": [
+          "14 days"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "Can I pay my bill by bank transfer?",
+        "must_contain": [
+          "bank transfer"
+        ],
+        "must_not_contain": []
+      },
+      {
+        "user": "Thanks!",
+        "must_contain": [],
+        "must_not_contain": []
+      }
+    ]
+  },
+  {
+    "id": "ESC-005",
+    "category": "escalation",
+    "scenario": "A customer expresses mild frustration but does not ask for a person, then asks an answerable question.",
+    "expected_outcome": "The assistant acknowledges the frustration, answers the billing question itself, and does not hand over to an agent.",
+    "should_escalate": false,
+    "turns": [
+      {
+        "user": "This is so confusing.",
+        "must_contain": [],
+        "must_not_contain": []
+      },
+      {
+        "user": "When is my bill due?",
+        "must_contain": [
+          "14 days"
+        ],
+        "must_not_contain": []
+      }
+    ]
+  }
+]

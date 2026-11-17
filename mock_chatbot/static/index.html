@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nimbus Telecom – Support</title>
+  <link rel="stylesheet" href="/static/widget.css">
+</head>
+<body>
+  <main class="page">
+    <h1>Nimbus Telecom</h1>
+    <p>Demo storefront for the mock chatbot. Open the chat with the button in the corner.</p>
+  </main>
+
+  <button class="launcher" data-testid="chat-launcher" aria-label="Open chat" aria-expanded="false" aria-controls="chat-panel">
+    Chat
+  </button>
+
+  <section class="panel" id="chat-panel" data-testid="chat-panel" role="dialog" aria-label="Nimbus support chat" hidden>
+    <header class="panel-header">
+      <span>Nimbus Assistant</span>
+      <button class="close" data-testid="chat-close" aria-label="Close chat">×</button>
+    </header>
+    <div class="handoff" data-testid="handoff-banner" role="status" hidden>
+      You are being connected to a live agent.
+    </div>
+    <div class="messages" data-testid="chat-messages" role="log" aria-live="polite" aria-label="Conversation"></div>
+    <div class="typing" data-testid="typing-indicator" aria-hidden="true" hidden>Nimbus Assistant is typing…</div>
+    <form class="composer" data-testid="chat-form" autocomplete="off">
+      <input type="text" data-testid="chat-input" aria-label="Type your message" placeholder="Type your message" maxlength="2000">
+      <button type="submit" data-testid="chat-send" aria-label="Send message">Send</button>
+    </form>
+  </section>
+
+  <script src="/static/widget.js"></script>
+</body>
+</html>

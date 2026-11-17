@@ -1,0 +1,39 @@
+# make demo  ->  docker compose up --build --abort-on-container-exit --exit-code-from gate
+#
+# chatbot : the mock Nimbus Telecom bot (API + web widget) on http://localhost:8080
+# gate    : runs API smoke -> UI smoke -> DeepEval, against the chatbot service
+#
+# To gate a real bot instead, set CHATBOT_BASE_URL (and the contract variables
+# from .env.example) in .env and run:  docker compose run --rm --no-deps gate
+services:
+  chatbot:
+    build: .
+    image: omnichannel-chatbot-quality-gate
+    environment:
+      MOCK_BOT_FAULT: ${MOCK_BOT_FAULT:-none} # none | hallucinate | forget | leak
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=2)"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  gate:
+    image: omnichannel-chatbot-quality-gate
+    depends_on:
+      chatbot:
+        condition: service_healthy
+    command: ["bash", "scripts/run_gate.sh"]
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      CHATBOT_BASE_URL: ${CHATBOT_BASE_URL:-http://chatbot:8080}
+      CHATBOT_CHANNEL: ${CHATBOT_CHANNEL:-api}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      EVAL_JUDGE_PROVIDER: ${EVAL_JUDGE_PROVIDER:-openai}
+      EVAL_JUDGE_MODEL: ${EVAL_JUDGE_MODEL:-}
+    volumes:
+      - ./artifacts:/app/artifacts
